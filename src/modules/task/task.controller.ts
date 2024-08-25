@@ -1,18 +1,34 @@
-import { Controller, Get } from '@nestjs/common';
+import { PageOptionsDto } from './../../shared/dtos/page-options.dto';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FindAllUseCase } from './use-cases/find-all.use-case';
+import { ApiTags } from '@nestjs/swagger';
+import { TaskDto } from './dto/task.dto';
+import { ApiPaginatedResponse } from 'src/shared/decorators/api-paginated-response.decorator';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('task')
+@ApiTags('Task')
 export class TaskController {
   constructor(private readonly findAllUseCase: FindAllUseCase) {}
 
   // @Post()
-  // acreate(@Body() createTaskDto: CreateTaskDto) {
+  // create(@Body() createTaskDto: CreateTaskDto) {
   //   return this.taskService.create(createTaskDto);
   // }
 
   @Get()
-  async findAll() {
-    return await this.findAllUseCase.execute();
+  @HttpCode(HttpStatus.OK)
+  @ApiPaginatedResponse(TaskDto)
+  async findAll(@Query() pageOptionsDto: PageOptionsDto) {
+    return await this.findAllUseCase.execute(pageOptionsDto);
   }
 
   // @Get(':id')

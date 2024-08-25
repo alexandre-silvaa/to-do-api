@@ -1,3 +1,4 @@
+import { PageOptionsDto } from './../../../shared/dtos/page-options.dto';
 import { TaskGatewayInterface } from './../gateways/task-gateway.interface';
 import { Inject, Injectable } from '@nestjs/common';
 
@@ -8,7 +9,7 @@ export class FindAllUseCase {
     private taskGatewayInterface: TaskGatewayInterface,
   ) {}
 
-  async execute() {
-    return await this.taskGatewayInterface.findAll();
+  async execute(pageOptionsDto: PageOptionsDto) {
+    return await this.taskGatewayInterface.findAll(pageOptionsDto);
   }
 }

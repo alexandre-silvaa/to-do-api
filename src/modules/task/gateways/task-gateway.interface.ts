@@ -1,5 +1,7 @@
-import { TaskEntity } from 'src/database/entities/task.entity';
+import { PageOptionsDto } from 'src/shared/dtos/page-options.dto';
+import { PageDto } from 'src/shared/dtos/page.dto';
+import { TaskDto } from '../dto/task.dto';
 
 export interface TaskGatewayInterface {
-  findAll(): Promise<TaskEntity[]>;
+  findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<TaskDto>>;
 }
