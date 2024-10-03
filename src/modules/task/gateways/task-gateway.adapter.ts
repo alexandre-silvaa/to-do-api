@@ -6,6 +6,8 @@ import { TaskEntity } from 'src/database/entities/task.entity';
 import { Repository } from 'typeorm';
 import { PageMetaDto } from 'src/shared/dtos/page-meta.dto';
 import { PageDto } from 'src/shared/dtos/page.dto';
+import { CreateTaskDto } from '../dto/create-task.dto';
+import { TaskDto } from '../dto/task.dto';
 
 @Injectable()
 export class TaskGatewayAdapter implements TaskGatewayInterface {
@@ -27,5 +29,10 @@ export class TaskGatewayAdapter implements TaskGatewayInterface {
     });
 
     return new PageDto(response[0], pageMetaDto);
+  }
+
+  async create(createTaskDto: CreateTaskDto): Promise<TaskDto> {
+    const task = this.taskRepository.create(createTaskDto);
+    return await this.taskRepository.save(task);
   }
 }

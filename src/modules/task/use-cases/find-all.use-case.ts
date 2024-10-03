@@ -6,7 +6,7 @@ import { Inject, Injectable } from '@nestjs/common';
 export class FindAllUseCase {
   constructor(
     @Inject('TaskGatewayInterface')
-    private taskGatewayInterface: TaskGatewayInterface,
+    private readonly taskGatewayInterface: TaskGatewayInterface,
   ) {}
 
   async execute(pageOptionsDto: PageOptionsDto) {
