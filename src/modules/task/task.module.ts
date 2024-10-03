@@ -5,6 +5,7 @@ import { TaskGatewayAdapter } from './gateways/task-gateway.adapter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'src/database';
 import { CreateUseCase } from './use-cases/create.use-case';
+import { MailerSendService } from 'src/mailer/mailer.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([...entities])],
@@ -13,6 +14,7 @@ import { CreateUseCase } from './use-cases/create.use-case';
     FindAllUseCase,
     CreateUseCase,
     TaskGatewayAdapter,
+    MailerSendService,
     {
       provide: 'TaskGatewayInterface',
       useExisting: TaskGatewayAdapter,
