@@ -1,4 +1,4 @@
-import { PageOptionsDto } from './../../../shared/dtos/page-options.dto';
+import { PageOptionsDto } from '../../../shared/dtos/page-options.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskGatewayInterface } from './task-gateway.interface';
 import { Injectable } from '@nestjs/common';

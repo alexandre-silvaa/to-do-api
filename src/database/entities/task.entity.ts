@@ -6,6 +6,12 @@ export class TaskEntity extends AbstractEntity {
   @Column({ name: 'title', length: 200 })
   title: string;
 
-  @Column({ name: 'description', length: 255, nullable: true })
+  @Column({ name: 'email', length: 100 })
+  email: string;
+
+  @Column({ name: 'description', type: 'text', nullable: true })
   description: string;
+
+  @Column({ name: 'due_date', type: 'datetime' })
+  due_date: Date;
 }
