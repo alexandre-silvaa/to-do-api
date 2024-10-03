@@ -8,11 +8,11 @@ export class TaskDto {
   public title: string;
 
   @ApiProperty()
-  public email: string;
-
-  @ApiProperty()
   public description: string;
 
   @ApiProperty()
   public due_date: Date;
+
+  @ApiProperty()
+  public remember_date?: Date;
 }
