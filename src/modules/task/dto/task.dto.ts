@@ -12,6 +12,9 @@ export class TaskDto {
   public description: string;
 
   @ApiProperty()
+  public done: boolean;
+
+  @ApiProperty()
   public due_date: Date;
 
   @ApiProperty()

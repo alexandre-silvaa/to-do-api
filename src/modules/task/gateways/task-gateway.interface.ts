@@ -5,5 +5,6 @@ import { CreateTaskDto } from '../dto/create-task.dto';
 
 export interface TaskGatewayInterface {
   findAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<TaskDto>>;
+  toggleStatus(idTask: string): Promise<void>;
   create(createTaskDto: CreateTaskDto): Promise<TaskDto>;
 }

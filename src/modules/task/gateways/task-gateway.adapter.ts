@@ -19,6 +19,16 @@ export class TaskGatewayAdapter implements TaskGatewayInterface {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
+  async toggleStatus(idTask: string): Promise<void> {
+    const task = await this.taskRepository.findOne({ where: { id: idTask } });
+    if (!task) {
+      throw new NotFoundException('Tarefa não encontrada!');
+    }
+    await this.taskRepository.update(idTask, {
+      done: !task.done,
+    });
+  }
+
   async findAll(pageOptionsDto: PageOptionsDto) {
     const response = await this.taskRepository.findAndCount({
       order: { createdAt: pageOptionsDto?.order },

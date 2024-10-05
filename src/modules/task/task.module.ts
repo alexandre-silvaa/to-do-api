@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'src/database';
 import { CreateUseCase } from './use-cases/create.use-case';
 import { MailerSendService } from 'src/mailer/mailer.service';
+import { ToggleStatusUseCase } from './use-cases/toggle-status.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([...entities])],
@@ -13,6 +14,7 @@ import { MailerSendService } from 'src/mailer/mailer.service';
   providers: [
     FindAllUseCase,
     CreateUseCase,
+    ToggleStatusUseCase,
     TaskGatewayAdapter,
     MailerSendService,
     {
