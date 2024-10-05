@@ -7,7 +7,7 @@ export class UserEntity extends AbstractEntity {
   @Column({ name: 'name', length: 200 })
   name: string;
 
-  @Column({ name: 'email', length: 200 })
+  @Column({ name: 'email', unique: true, length: 200 })
   email: string;
 
   @OneToMany(() => TaskEntity, (task) => task.user)

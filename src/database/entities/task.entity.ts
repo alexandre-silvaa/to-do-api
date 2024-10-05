@@ -16,6 +16,9 @@ export class TaskEntity extends AbstractEntity {
   @Column({ name: 'remember_date', type: 'datetime', nullable: true })
   remember_date: Date;
 
+  @Column({ name: 'done', type: 'boolean', default: false })
+  done: boolean;
+
   @ManyToOne(() => UserEntity, (user) => user.tasks)
   user: UserEntity;
 }

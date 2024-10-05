@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 
 import { UserEntity } from 'src/database/entities/user.entity';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { CreateOrGetUserDto } from '../dto/createOrGet-user.dto';
 import { UserDto } from '../dto/user.dto';
 
 @Injectable()
@@ -14,8 +14,15 @@ export class UserGatewayAdapter implements UserGatewayInterface {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<UserDto> {
-    const user = this.userRepository.create(createUserDto);
+  async findByEmail(email: string): Promise<UserDto> {
+    return await this.userRepository.findOne({
+      relations: { tasks: true },
+      where: { email },
+    });
+  }
+
+  async create(createOrGetUserDto: CreateOrGetUserDto): Promise<UserDto> {
+    const user = this.userRepository.create(createOrGetUserDto);
     return await this.userRepository.save(user);
   }
 }

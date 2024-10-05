@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'src/database';
-import { CreateUseCase } from './use-cases/create.use-case';
+import { CreateOrGetUseCase } from './use-cases/createOrGet.use-case';
 import { UserGatewayAdapter } from './gateways/user-gateway.adapter';
 import { UserController } from './user.controller';
 
@@ -9,7 +9,7 @@ import { UserController } from './user.controller';
   imports: [TypeOrmModule.forFeature([...entities])],
   controllers: [UserController],
   providers: [
-    CreateUseCase,
+    CreateOrGetUseCase,
     UserGatewayAdapter,
     {
       provide: 'UserGatewayInterface',

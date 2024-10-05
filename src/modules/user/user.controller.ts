@@ -8,26 +8,26 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUseCase } from './use-cases/create.use-case';
+import { CreateOrGetUseCase } from './use-cases/createOrGet.use-case';
 import { UserDto } from './dto/user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateOrGetUserDto } from './dto/createOrGet-user.dto';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
 @ApiTags('User')
 export class UserController {
-  constructor(private readonly createUseCase: CreateUseCase) {}
+  constructor(private readonly createOrGetUseCase: CreateOrGetUseCase) {}
 
   @Post()
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Cria um novo usuário' })
+  @ApiOperation({ summary: 'Cria um usuário ou busca através de nome e email' })
   @ApiResponse({
     status: 201,
-    description: 'Usuário criada com sucesso.',
     type: UserDto,
   })
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos.' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.createUseCase.execute(createUserDto);
+  createOrGetUser(@Body() createOrGetUserDto: CreateOrGetUserDto) {
+    console.log(createOrGetUserDto);
+    return this.createOrGetUseCase.execute(createOrGetUserDto);
   }
 }
